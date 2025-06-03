@@ -1,0 +1,7 @@
+Clips/
+Recordings/
+Snapshots/
+*.tar.xz
+*.log
+*.pyc
+__pycache__/

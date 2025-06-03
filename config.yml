@@ -1,0 +1,212 @@
+mqtt:
+  enabled: true
+  host: 172.20.15.174
+  port: 1883
+  user: mqtt_user
+  password: mqtt_password
+  stats_interval: 60
+
+detectors:
+  tensorrt:
+    type: tensorrt
+    device: 0
+
+model:
+  path: /config/model_cache/tensorrt/yolov7x-640.trt
+  labelmap_path: /labelmap/coco-80.txt
+  input_tensor: nchw
+  input_pixel_format: rgb
+  width: 640
+  height: 640
+
+objects:
+  track:
+    - person
+    - face
+    - banana
+    - car
+    - apple
+    - orange
+    - mouse
+    - keyboard
+    - cell phone
+    - book
+    - laptop
+    - suitcase
+    - handbag
+    - backpack
+
+go2rtc:
+  streams:
+    Camera_Teste:
+      - rtsp://172.20.20.253:7447/Wj5kykkM3iVW9OzP
+    Camera_DataCenter:
+      - rtsp://172.20.20.253:7447/XksiPICii8Kplxf6
+    Camera_Frente:
+      - rtsp://172.20.20.253:7447/TAqdo0onOTcR64Bm
+
+tls:
+  enabled: false
+
+cameras:
+  Camera_Teste:
+    ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      inputs:
+        - path: rtsp://127.0.0.1:8554/Camera_Teste
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 320
+      height: 320
+      fps: 5
+      min_initialized: 2
+    record:
+      enabled: true
+      retain:
+        days: 5
+        mode: motion
+      alerts:
+        retain:
+          days: 5
+          mode: active_objects
+      detections:
+        retain:
+          days: 5
+          mode: active_objects
+    motion:
+      enabled: true
+      threshold: 30
+      mqtt_off_delay: 30
+    objects:
+      track:
+        - person
+        - face
+        - banana
+        - car
+        - apple
+        - orange
+        - mouse
+        - keyboard
+        - cell phone
+        - book
+        - laptop
+        - suitcase
+        - handbag
+        - backpack
+    zones: {}
+  Camera_DataCenter:
+    ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      inputs:
+        - path: rtsp://127.0.0.1:8554/Camera_DataCenter
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 320
+      height: 320
+      fps: 5
+      min_initialized: 2
+    record:
+      enabled: true
+      retain:
+        days: 5
+        mode: motion
+      alerts:
+        retain:
+          days: 5
+          mode: active_objects
+      detections:
+        retain:
+          days: 5
+          mode: active_objects
+    motion:
+      enabled: true
+      threshold: 30
+      mqtt_off_delay: 30
+    objects:
+      track:
+        - person
+        - face
+        - cell phone
+        - laptop
+        - suitcase
+        - handbag
+        - backpack
+    # Zones are omitted for this camera, add if you have specific zones
+
+  Camera_Frente:
+    ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      inputs:
+        - path: rtsp://127.0.0.1:8554/Camera_Frente
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 320
+      height: 320
+      fps: 5
+      min_initialized: 2
+    record:
+      enabled: true
+      retain:
+        days: 5
+        mode: motion
+      alerts:
+        retain:
+          days: 5
+          mode: active_objects
+      detections:
+        retain:
+          days: 5
+          mode: active_objects
+    motion:
+      enabled: true
+      threshold: 30
+      mqtt_off_delay: 30
+    objects:
+      track:
+        - person
+        - face
+        - car
+        - cell phone
+        - suitcase
+        - handbag
+        - backpack
+    # Zones are omitted for this camera, add if you have specific zones
+
+    zones:
+      Entrada:
+        coordinates: 0.085,0.643,0.443,0.581,0.526,0.846,0.063,0.962
+        loitering_time: 0
+        objects: person
+      Estacionamento:
+        coordinates: 0.121,0.421,0.115,0.218,0.639,0.196,0.624,0.381
+        loitering_time: 0
+        objects: car
+detect:
+  enabled: true
+version: 0.16-0
+semantic_search:
+  enabled: false
+  model_size: small
+face_recognition:
+  enabled: true
+  model_size: large
+lpr:
+  enabled: true
+classification:
+  bird:
+    enabled: false
