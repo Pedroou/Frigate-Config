@@ -8,33 +8,16 @@ mqtt:
 
 detectors:
   tensorrt:
-    type: tensorrt
-    device: 0
+    type: onnx
 
 model:
-  path: /config/model_cache/tensorrt/yolov7x-640.trt
-  labelmap_path: /labelmap/coco-80.txt
-  input_tensor: nchw
-  input_pixel_format: rgb
-  width: 640
-  height: 640
+  path: plus://94cf39f8a42bf67ad1892b4925e8d2bf
 
 objects:
   track:
     - person
     - face
-    - banana
     - car
-    - apple
-    - orange
-    - mouse
-    - keyboard
-    - cell phone
-    - book
-    - laptop
-    - suitcase
-    - handbag
-    - backpack
 
 go2rtc:
   streams:
@@ -50,6 +33,7 @@ tls:
 
 cameras:
   Camera_Teste:
+    enabled: false
     ffmpeg:
       output_args:
         record: preset-record-ubiquiti
@@ -86,20 +70,10 @@ cameras:
       track:
         - person
         - face
-        - banana
         - car
-        - apple
-        - orange
-        - mouse
-        - keyboard
-        - cell phone
-        - book
-        - laptop
-        - suitcase
-        - handbag
-        - backpack
     zones: {}
   Camera_DataCenter:
+    enabled: false
     ffmpeg:
       output_args:
         record: preset-record-ubiquiti
@@ -136,11 +110,7 @@ cameras:
       track:
         - person
         - face
-        - cell phone
-        - laptop
-        - suitcase
-        - handbag
-        - backpack
+        - car
     # Zones are omitted for this camera, add if you have specific zones
 
   Camera_Frente:
@@ -155,8 +125,8 @@ cameras:
             - record
     detect:
       enabled: true
-      width: 320
-      height: 320
+      width: 640
+      height: 640
       fps: 5
       min_initialized: 2
     record:
@@ -176,24 +146,44 @@ cameras:
       enabled: true
       threshold: 30
       mqtt_off_delay: 30
+      mask: 
+        0,0,0,0.045,0.033,0.043,0.051,0.438,0.109,0.422,0.106,0.149,0.424,0.158,0.65,0.17,0.864,0.184,0.886,0.044,0.77,0
     objects:
       track:
         - person
         - face
         - car
-        - cell phone
-        - suitcase
-        - handbag
-        - backpack
     # Zones are omitted for this camera, add if you have specific zones
 
+      filters:
+        person:
+          mask: 0.505,0.278,0.519,0.286,0.536,0.171,0.52,0.167
+        car:
+          mask: 
+            0.732,0.175,0.106,0.149,0.109,0.409,0.05,0.416,0.033,0.043,0,0.045,0,0,0.77,0,0.886,0.044,0.841,0.347,0.713,0.344
     zones:
-      Entrada:
-        coordinates: 0.085,0.643,0.443,0.581,0.526,0.846,0.063,0.962
+      Entrance-IN:
+        coordinates: 
+          0.463,0.659,0.078,0.734,0.063,0.904,0.52,0.805,0.613,0.732,0.645,0.633,0.602,0.556,0.443,0.581
         loitering_time: 0
         objects: person
-      Estacionamento:
-        coordinates: 0.121,0.421,0.115,0.218,0.639,0.196,0.624,0.381
+        inertia: 3
+      Entrance-OUT:
+        coordinates: 0.082,0.733,0.463,0.659,0.42,0.505,0.111,0.544
+        inertia: 3
+        loitering_time: 0
+        objects: person
+      Parking_Lot_1:
+        coordinates: 0.109,0.422,0.106,0.149,0.311,0.154,0.368,0.406
+        inertia: 3
+        loitering_time: 0
+        objects: car
+      Parking_Lot_2:
+        coordinates: 0.311,0.154,0.368,0.404,0.418,0.404,0.424,0.158
+        loitering_time: 0
+        objects: car
+      Parking_Lot_3:
+        coordinates: 0.507,0.162,0.496,0.353,0.637,0.355,0.65,0.17
         loitering_time: 0
         objects: car
 detect:
