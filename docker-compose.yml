@@ -1,6 +1,6 @@
 services:
   frigate:
-    image: ghcr.io/blakeblackshear/frigate:c11ca42-tensorrt
+    image: ghcr.io/blakeblackshear/frigate:dba9206-tensorrt
     container_name: frigate
     restart: unless-stopped
     privileged: true
@@ -9,6 +9,7 @@ services:
     environment:
       - YOLO_MODELS=yolov7x-640
       - USE_FP16=false
+      - PLUS_API_KEY=32c79156-3111-4700-9fb9-66efc81d4586:b7c23d2c523b610e21fe58e5016b4c27bc68bbab
     ports:
       - "8554:8554"
       - "8555:8555"
@@ -16,7 +17,6 @@ services:
       - "5000:5000"
     volumes:
       - ./config.yml:/config/config.yml
-      - ./coco-labels-91.txt:/config/coco-labels-91.txt
       - ./Clips:/media/frigate/clips
       - ./Recordings:/media/frigate/recordings
       - ./Snapshots:/media/frigate/snapshots
