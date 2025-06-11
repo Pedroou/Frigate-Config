@@ -45,12 +45,11 @@ cameras:
             - record
     detect:
       enabled: true
-      width: 320
-      height: 320
+      width: 640
+      height: 640
       fps: 5
       min_initialized: 2
     record:
-      enabled: true
       retain:
         days: 5
         mode: motion
@@ -73,7 +72,7 @@ cameras:
         - car
     zones: {}
   Camera_DataCenter:
-    enabled: false
+    enabled: true
     ffmpeg:
       output_args:
         record: preset-record-ubiquiti
@@ -85,12 +84,11 @@ cameras:
             - record
     detect:
       enabled: true
-      width: 320
-      height: 320
+      width: 640
+      height: 640
       fps: 5
       min_initialized: 2
     record:
-      enabled: true
       retain:
         days: 5
         mode: motion
@@ -111,9 +109,9 @@ cameras:
         - person
         - face
         - car
-    # Zones are omitted for this camera, add if you have specific zones
 
   Camera_Frente:
+    enabled: true
     ffmpeg:
       output_args:
         record: preset-record-ubiquiti
@@ -130,7 +128,6 @@ cameras:
       fps: 5
       min_initialized: 2
     record:
-      enabled: true
       retain:
         days: 5
         mode: motion
@@ -153,7 +150,6 @@ cameras:
         - person
         - face
         - car
-    # Zones are omitted for this camera, add if you have specific zones
 
       filters:
         person: {}
