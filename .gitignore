@@ -5,3 +5,4 @@ Snapshots/
 *.log
 *.pyc
 __pycache__/
+frigate-dev/
