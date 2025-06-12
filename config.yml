@@ -18,6 +18,7 @@ objects:
     - person
     - face
     - car
+    - license_plate
 
 go2rtc:
   streams:
@@ -70,6 +71,8 @@ cameras:
         - person
         - face
         - car
+        - license_plate
+
     zones: {}
   Camera_DataCenter:
     enabled: true
@@ -109,7 +112,11 @@ cameras:
         - person
         - face
         - car
+        - license_plate
 
+      filters:
+        car:
+          mask: 0,0,0,0.038,0.421,0.038,0.421,0
   Camera_Frente:
     enabled: true
     ffmpeg:
@@ -150,6 +157,7 @@ cameras:
         - person
         - face
         - car
+        - license_plate
 
       filters:
         person: {}
