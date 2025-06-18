@@ -1,16 +1,26 @@
-command for building the container:
+### ---- Commands for running Frigate ----
+
+
+# -- Command for building the container:
 cd frigate-dev/
 docker buildx bake -f docker/tensorrt/trt.hcl tensorrt
 
-command for running the built container:
+# -- Command for running the built container:
 cd frigate/
 docker compose up
 
-command for entering the container:
+# -- Command for entering the container:
 docker exec -it frigate bash
 
-command for checking if the custom frigate version is being used:
-cat /PEDROOU_MARKER.txt
-# Should output: PEDROOU CUSTOM BUILD
+# -- Command for checking if the custom Frigate version is being used:
+cat /PEDROOU_MARKER.txt		# Should output: PEDROOU CUSTOM BUILD
 
-# If you see the above, you are running your own custom image.
+
+### ---- How to update the frontend in Frigate ----
+
+# -- Command for building the frontend:
+cd /path/to/frigate-dev/web
+npm ci         # Only needed the first time or when dependencies change
+npm run build
+
+# -- Then build the container for the changed frontend to be applied.
