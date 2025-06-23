@@ -1,6 +1,5 @@
 ### ---- Commands for running Frigate ----
 
-
 # -- Command for building the container:
 cd frigate-dev/
 docker buildx bake -f docker/tensorrt/trt.hcl tensorrt
@@ -17,6 +16,9 @@ cat /PEDROOU_MARKER.txt		# Should output: PEDROOU CUSTOM BUILD
 
 
 ### ---- How to update the frontend in Frigate ----
+
+# -- Command for running the frontend:
+npm run dev
 
 # -- Command for building the frontend:
 cd /path/to/frigate-dev/web

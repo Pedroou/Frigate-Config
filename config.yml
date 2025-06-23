@@ -203,3 +203,4 @@ lpr:
 classification:
   bird:
     enabled: false
+camera_groups: {}
