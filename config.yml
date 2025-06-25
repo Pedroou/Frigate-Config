@@ -1,0 +1,209 @@
+mqtt:
+  enabled: true
+  host: 172.20.15.174
+  port: 1883
+  user: mqtt_user
+  password: mqtt_password
+  stats_interval: 60
+
+    #  detectors:
+    # tensorrt:
+    # type: onnx
+
+    #model:
+    #  path: plus://94cf39f8a42bf67ad1892b4925e8d2bf
+
+objects:
+  track:
+    - person
+    - #face
+    - car
+    - #license_plate
+
+go2rtc:
+  streams:
+    Camera_Teste:
+      - rtsp://172.20.20.253:7447/Wj5kykkM3iVW9OzP
+    Camera_DataCenter:
+      - rtsp://172.20.20.253:7447/XksiPICii8Kplxf6
+    Camera_Frente:
+      - rtsp://172.20.20.253:7447/TAqdo0onOTcR64Bm
+
+tls:
+  enabled: false
+
+cameras:
+  Camera_Teste:
+    enabled: false
+    ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      inputs:
+        - path: rtsp://127.0.0.1:8554/Camera_Teste
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 640
+      height: 640
+      fps: 5
+      min_initialized: 2
+    record:
+      retain:
+        days: 5
+        mode: motion
+      alerts:
+        retain:
+          days: 5
+          mode: active_objects
+      detections:
+        retain:
+          days: 5
+          mode: active_objects
+    motion:
+      enabled: true
+      threshold: 30
+      mqtt_off_delay: 30
+    objects:
+      track:
+        - person
+        - #face
+        - car
+        - #license_plate
+
+          #    zones: {}
+  Camera_DataCenter:
+    enabled: true
+    ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      inputs:
+        - path: rtsp://127.0.0.1:8554/Camera_DataCenter
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 640
+      height: 640
+      fps: 5
+      min_initialized: 2
+    record:
+      retain:
+        days: 5
+        mode: motion
+      alerts:
+        retain:
+          days: 5
+          mode: active_objects
+      detections:
+        retain:
+          days: 5
+          mode: active_objects
+    motion:
+      enabled: true
+      threshold: 30
+      mqtt_off_delay: 30
+    objects:
+      track:
+        - person
+        - #face
+        - car
+        - #license_plate
+
+          #      filters:
+        #        car:
+          #          mask: 0,0,0,0.038,0.421,0.038,0.421,0
+  Camera_Frente:
+    enabled: true
+    ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      inputs:
+        - path: rtsp://127.0.0.1:8554/Camera_Frente
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 640
+      height: 640
+      fps: 5
+      min_initialized: 2
+    record:
+      retain:
+        days: 5
+        mode: motion
+      alerts:
+        retain:
+          days: 5
+          mode: active_objects
+      detections:
+        retain:
+          days: 5
+          mode: active_objects
+    motion:
+      enabled: true
+      threshold: 30
+      mqtt_off_delay: 30
+        #      mask: 
+        #        0,0,0,0.045,0.033,0.043,0.051,0.438,0.109,0.422,0.106,0.149,0.424,0.158,0.65,0.17,0.864,0.184,0.886,0.044,0.77,0
+    objects:
+      track:
+        - person
+        - #face
+        - car
+        - #license_plate
+
+          #      filters:
+          #        person: {}
+          #        car:
+          #          mask: 
+          #            0.732,0.175,0.106,0.149,0.109,0.409,0.05,0.416,0.033,0.043,0,0.045,0,0,0.77,0,0.886,0.044,0.841,0.347,0.713,0.344
+          #    zones:
+          #      Entrance-IN:
+          #        coordinates: 
+          #          0.463,0.659,0.078,0.734,0.063,0.904,0.52,0.805,0.613,0.732,0.645,0.633,0.602,0.556,0.443,0.581
+          #        loitering_time: 0
+          #        objects: person
+          #        inertia: 3
+          #      Entrance-OUT:
+        #        coordinates: 0.082,0.733,0.463,0.659,0.42,0.505,0.111,0.544
+          #        inertia: 3
+          #        loitering_time: 0
+          #        objects: person
+          #      Parking_Lot_1:
+        #        coordinates: 0.109,0.422,0.106,0.149,0.311,0.154,0.368,0.406
+          #        inertia: 3
+          #        loitering_time: 0
+          #        objects: car
+          #      Parking_Lot_2:
+        #        coordinates: 0.311,0.154,0.368,0.404,0.418,0.404,0.424,0.158
+          #        loitering_time: 0
+          #        objects: car
+          #      Parking_Lot_3:
+        #        coordinates: 0.507,0.162,0.496,0.353,0.637,0.355,0.65,0.17
+          #        loitering_time: 0
+          #        objects: car
+          #detect:
+          #  enabled: true
+          #version: 0.16-0
+          #semantic_search:
+          #  enabled: false
+          #  model_size: small
+          #face_recognition:
+          # enabled: true
+          # model_size: large
+          #pr:
+          # enabled: true
+          #lassification:
+          # bird:
+          #   enabled: false
+          #amera_groups: {}
+detect:
+  enabled: true
+version: 0.16-0
