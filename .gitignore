@@ -1,1 +1,9 @@
+Clips/
+Recordings/
+Snapshots/
+*.tar.xz
 *.tar
+*.log
+*.pyc
+__pycache__/
+frigate-dev/
