@@ -7,3 +7,4 @@ Snapshots/
 *.pyc
 __pycache__/
 Frigate-Dev/
+docker-compose.yml
