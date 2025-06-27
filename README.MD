@@ -46,3 +46,9 @@ npm run build
 ```
 
 *Then build the container again for the changed frontend to be applied.*
+
+## Command to open current path in Windows Explorer
+
+```bash
+explorer.exe .
+```

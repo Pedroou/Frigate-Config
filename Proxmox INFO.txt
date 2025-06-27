@@ -8,7 +8,7 @@ This file contains important data such as *logins, **passwords* and *commands*.
 
 # Entering into the CT through local Shell
 ```bash
-ssh pedro@10.1.90.150
+ssh pedro@172.20.15.230
 ```
 
 
