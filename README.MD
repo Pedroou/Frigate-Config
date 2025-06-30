@@ -42,7 +42,7 @@ npm run dev
 ```bash
 cd /path/to/frigate-dev/web
 npm ci          # Only needed the first time or when dependencies change
-npm run build
+sudo npm run build
 ```
 
 *Then build the container again for the changed frontend to be applied.*
