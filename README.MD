@@ -7,6 +7,12 @@ cd frigate-dev/
 docker buildx bake -f docker/tensorrt/trt.hcl tensorrt
 ```
 
+## Build command for the CPU image
+
+```bash
+docker build -t frigate-cpu:latest -f docker/main/Dockerfile .
+```
+
 ### Run the Built Container
 
 ```bash
