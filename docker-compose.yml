@@ -1,17 +1,26 @@
 services:
   frigate:
-    #image: ghcr.io/blakeblackshear/frigate:dba9206-tensorrt #stable and working one.
-    image: frigate-tensorrt:latest #our dev image.
-    #image: frigate-cpu:latest
+    #image: ghcr.io/blakeblackshear/frigate:dba9206-tensorrt #Official Frigate version (gpu version).
+    image: frigate:latest-tensorrt #GPU dev image.
+    #image: frigate-latest:cpu #CPU dev image.
     container_name: frigate
     restart: unless-stopped
     privileged: true
-    shm_size: "128mb"
-    runtime: nvidia
+    shm_size: "256mb"
+
+    #runtime: nvidia # Old NVIDIA GPU configuration
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
     environment:
       - YOLO_MODELS=yolov7x-640
       - USE_FP16=false
-      - PLUS_API_KEY=32c79156-3111-4700-9fb9-66efc81d4586:b7c23d2c523b610e21fe58e5016b4c27bc68bbab
+      - PLUS_API_KEY=32c79156-3111-4700-9fb9-66efc81d4586:b7c23d2c523b610e21fe58e5016b4c27bc68bbab  # Consider using Docker secrets instead
     ports:
       - "8554:8554"
       - "8555:8555"
@@ -22,3 +31,4 @@ services:
       - ./Clips:/media/frigate/clips
       - ./Recordings:/media/frigate/recordings
       - ./Snapshots:/media/frigate/snapshots
+      - /etc/localtime:/etc/localtime:ro # Time sync
