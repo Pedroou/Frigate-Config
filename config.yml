@@ -135,6 +135,7 @@ cameras:
       fps: 5
       min_initialized: 2
     record:
+      enabled: true
       retain:
         days: 5
         mode: motion
